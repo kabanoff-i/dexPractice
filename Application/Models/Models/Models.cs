@@ -7,6 +7,7 @@ namespace Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public string? PassportNumber { get; set; }
         public Person(string name, string surname, DateTime date)
         {
             Name = name;
@@ -103,10 +104,12 @@ namespace Models
     }
     public class Account
     {
+        public string AccountNumber { get; set; }
         public string Currency { get; set; }
         public int Amount { get; set; }
-        public Account(string currency, int amount)
+        public Account(string accountNumber, string currency, int amount)
         {
+            AccountNumber = accountNumber;
             Currency = currency;
             Amount = amount;
         }

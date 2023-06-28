@@ -8,12 +8,18 @@ using System.Threading.Tasks;
 using Models;
 using Bogus;
 using System.Reflection;
+using Services.Exceprtions;
 
 
 namespace Services
 {
     public class TestDataGenerator
     {
+        public static Client GetClient()
+        {
+            var person = new Bogus.Person();
+            return new Client(person.FirstName, person.LastName, person.DateOfBirth, new Random().Next(1000).ToString(), person.Phone, person.Email);
+        }
         public static List<Client> CreateClientList()
         {
             List<Client> clients = new List<Client>();
@@ -50,7 +56,7 @@ namespace Services
             foreach (Client client in clients)
             {
                 Faker faker = new Faker();
-                accountsDictionary.Add(client, new Account(faker.Finance.Currency().Symbol, (int)faker.Finance.Amount()));
+                accountsDictionary.Add(client, new Account(faker.Finance.Account(), faker.Finance.Currency().Symbol, (int)faker.Finance.Amount()));
             }
             return accountsDictionary;
         }
@@ -60,7 +66,7 @@ namespace Services
             foreach (Client client in clients)
             {
                 Faker faker = new Faker();
-                accountsDictionary.Add(client, new List<Account>() { new Account(faker.Finance.Currency().Symbol, (int)faker.Finance.Amount()), new Account(faker.Finance.Currency().Symbol, (int)faker.Finance.Amount()) });
+                accountsDictionary.Add(client, new List<Account>() { new Account(faker.Finance.Account(), faker.Finance.Currency().Symbol, (int)faker.Finance.Amount()), new Account(faker.Finance.Account(), faker.Finance.Currency().Symbol, (int)faker.Finance.Amount()) });
             }
             return accountsDictionary;
         }
@@ -79,6 +85,68 @@ namespace Services
         {
             Models.Person a = client;
             return (Employee)a;
+        }
+    }
+    public class ClientService
+    {
+        Dictionary<Client, List<Account>> clientsAccounts = new Dictionary<Client, List<Account>>();
+        public List<Account> GetAccounts(Client client)
+        {
+            if (clientsAccounts.ContainsKey(client))
+            {
+                return clientsAccounts[client];
+            }
+
+            return new List<Account>();
+        }
+        public void AddClient(Client client)
+        {
+            if (client.DateOfBirth > DateTime.Now.AddYears(-18))
+            {
+                throw new ClientUnderageException("Client must be at least 18 years old");
+            }
+
+            if (string.IsNullOrEmpty(client.PassportNumber))
+            {
+                throw new MissingPassportDataException("Client must provide passport data");
+            }
+
+            clientsAccounts.Add(client, new List<Account> { CreateDefaultAccount() });
+        }
+
+        public void AddAccount(Client client, Account account)
+        {
+            if (!clientsAccounts.ContainsKey(client))
+            {
+                throw new ClientNotFoundException("Client not found");
+            }
+
+
+            clientsAccounts[client].Add(account);
+        }
+
+        public void EditAccount(Client client, Account account)
+        {
+            if (!clientsAccounts.ContainsKey(client))
+            {
+                throw new ClientNotFoundException("Client not found");
+            }
+            var clientAccounts = clientsAccounts[client];
+            var existingAccount = clientAccounts.FirstOrDefault(a => a.AccountNumber == account.AccountNumber);
+
+            if (existingAccount == null)
+            {
+                throw new AccountNotFoundException("Account not found.");
+            }
+
+
+            existingAccount.Amount = account.Amount;
+        }
+
+        private Account CreateDefaultAccount()
+        {
+            string accountNumber = Guid.NewGuid().ToString();
+            return new Account(accountNumber,"$", 0);
         }
     }
     public class Program
