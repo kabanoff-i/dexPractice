@@ -23,7 +23,6 @@ namespace Models
             Salary = salary;
             DateOfHire = dateOfHire;
         }
-
         public string Contract { get; set; }
         public string JobTitle { get; set; }
         public int Salary { get; set; }
@@ -37,7 +36,6 @@ namespace Models
             PhoneNumber = phoneNumber;
             Email = email;
         }
-
         public string ClientID { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
