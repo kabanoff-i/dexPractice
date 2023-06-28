@@ -24,6 +24,9 @@ namespace Dex
             void DoOperation(int n, Func<int, int> op) => Console.WriteLine(op(n));
 
             DoOperation(5, SquareNumber);
+
+            int x = 7;
+            Console.WriteLine(x.GetHashCode());
             Console.ReadLine();
 
         }

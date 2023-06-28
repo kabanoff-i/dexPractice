@@ -27,6 +27,29 @@ namespace Models
         public string JobTitle { get; set; }
         public int Salary { get; set; }
         public DateTime DateOfHire { get; set; }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+            if (!(obj is Employee)) return false;
+
+            var other = (Employee)obj;
+            return (other.Name == Name && other.Surname == Surname && other.Salary == Salary && other.DateOfBirth == DateOfBirth && other.DateOfHire == DateOfHire && other.JobTitle == JobTitle && other.Contract == Contract);
+        }
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + Name.GetHashCode();
+                hash = hash * 23 + Surname.GetHashCode();
+                hash = hash * 23 + DateOfBirth.GetHashCode();
+                hash = hash * 23 + Salary.GetHashCode();
+                hash = hash * 23 + DateOfHire.GetHashCode();
+                hash = hash * 23 + JobTitle.GetHashCode();
+                hash = hash * 23 + Contract.GetHashCode();
+                return hash;
+            }
+        }
     }
     public class Client : Person
     {
@@ -39,6 +62,28 @@ namespace Models
         public string ClientID { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+            if (!(obj is Client)) return false;
+
+            var other = (Client)obj;
+            return (other.Name == Name && other.Surname == Surname && other.ClientID == ClientID && other.DateOfBirth == DateOfBirth && other.PhoneNumber == PhoneNumber && other.Email == Email);
+        }
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + Name.GetHashCode();
+                hash = hash * 23 + Surname.GetHashCode();
+                hash = hash * 23 + DateOfBirth.GetHashCode();
+                hash = hash * 23 + ClientID.GetHashCode();
+                hash = hash * 23 + PhoneNumber.GetHashCode();
+                hash = hash * 23 + Email.GetHashCode();
+                return hash;
+            }
+        }
     }
     public struct Currency
     {
@@ -54,6 +99,16 @@ namespace Models
             this.code = code;
             this.country = country;
             this.exchangeRateToUSD = exchangeRateToUSD;
+        }
+    }
+    public class Account
+    {
+        public string Currency { get; set; }
+        public int Amount { get; set; }
+        public Account(string currency, int amount)
+        {
+            Currency = currency;
+            Amount = amount;
         }
     }
 }
