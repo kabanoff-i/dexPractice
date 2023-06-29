@@ -9,7 +9,8 @@ using Models;
 using Bogus;
 using System.Reflection;
 using Services.Exceprtions;
-
+using Services.Storage;
+using System.
 
 namespace Services
 {
@@ -77,6 +78,7 @@ namespace Services
         private long income = 1340000;
         private int expenses = 43300;
         private int numberOfEmployee = 180;
+        List<Models.Person> BlackList = new List<Models.Person>();
         public void CalcSalary(Employee employee)
         {
             employee.Salary = (int)(income - expenses) / numberOfEmployee;
@@ -86,10 +88,24 @@ namespace Services
             Models.Person a = client;
             return (Employee)a;
         }
+        public void AddBonus<T>(T person) where T: Models.Person
+        {
+            person.Bonus = income * 0.05;
+        }
+        public void AddToBlackList<T> (T person) where T: Models.Person
+        {
+            BlackList.Add(person);
+        }
+        public bool IsPersonInBlackList<T>(T person) where T: Models.Person
+        {
+            return BlackList.Contains(person);
+        }
     }
     public class ClientService
     {
         Dictionary<Client, List<Account>> clientsAccounts = new Dictionary<Client, List<Account>>();
+        ClientStorage clientStorage;
+
         public List<Account> GetAccounts(Client client)
         {
             if (clientsAccounts.ContainsKey(client))
@@ -148,6 +164,62 @@ namespace Services
             string accountNumber = Guid.NewGuid().ToString();
             return new Account(accountNumber,"$", 0);
         }
+
+        //IEnumerable
+        public List<Client> GetFilteredClients(string nameFilter, string phoneFilter, string passportFilter, DateTime? minDateOfBirth, DateTime? maxDateOfBirth)
+        {
+            var filteredClients = clientStorage.clients;
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                filteredClients = filteredClients.Where(c => c.Name.Contains(nameFilter)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(phoneFilter))
+            {
+                filteredClients = filteredClients.Where(c => c.PhoneNumber == phoneFilter).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(passportFilter))
+            {
+                filteredClients = filteredClients.Where(c => c.PassportNumber == passportFilter).ToList();
+            }
+
+            if (minDateOfBirth.HasValue)
+            {
+                filteredClients = filteredClients.Where(c => c.DateOfBirth >= minDateOfBirth.Value).ToList();
+            }
+
+            if (maxDateOfBirth.HasValue)
+            {
+                filteredClients = filteredClients.Where(c => c.DateOfBirth <= maxDateOfBirth.Value).ToList();
+            }
+
+            return filteredClients;
+        }
+        public Client GetYoungestClient()
+        {
+            var youngestClient = clientStorage.clients.OrderByDescending(c => c.DateOfBirth).FirstOrDefault();
+            return youngestClient;
+        }
+
+        public Client GetOldestClient()
+        {
+            var oldestClient = clientStorage.clients.OrderBy(c => c.DateOfBirth).FirstOrDefault();
+            return oldestClient;
+        }
+
+        public double CalculateAverageAge()
+        {
+            var totalAge = clientStorage.clients.Sum(c => (DateTime.Now - c.DateOfBirth).TotalDays / 365);
+            var averageAge = totalAge / clientStorage.clients.Count;
+            return averageAge;
+        }
+        public ClientService(ClientStorage clientStorage)
+        {
+            this.clientStorage = clientStorage;
+        }
+        public ClientService() { }
     }
     public class Program
     {

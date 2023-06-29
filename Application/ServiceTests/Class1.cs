@@ -2,6 +2,7 @@
 using Services;
 using Models;
 using Services.Exceprtions;
+using Services.Storage;
 
 namespace ServiceTests
 {
@@ -169,6 +170,96 @@ namespace ServiceTests
             clientService.AddAccount(client, account);
 
             Assert.Throws<AccountNotFoundException>(() => clientService.EditAccount(client, updatedAccount));
+        }
+    }
+    public class ClientServiceFiltersTests
+    {
+        [Fact]
+        public void GetYoungestClient_ReturnsYoungestClient()
+        {
+            // Arrange
+            var clientStorage = new ClientStorage();
+            ClientService clientService;
+
+            var client1 = TestDataGenerator.GetClient();
+            client1.DateOfBirth = new DateTime(1990, 1, 1);
+            client1.PassportNumber = "AB123456";
+            var client2 = TestDataGenerator.GetClient();
+            client2.DateOfBirth = new DateTime(1985, 5, 10);
+            client2.PassportNumber = "AB123456";
+            var client3 = TestDataGenerator.GetClient();
+            client3.DateOfBirth = new DateTime(1995, 12, 20);
+            client3.PassportNumber = "AB123456";
+
+
+            clientStorage.Add(client1);
+            clientStorage.Add(client2);
+            clientStorage.Add(client3);
+            clientService = new ClientService(clientStorage);
+
+            // Act
+            var youngestClient = clientService.GetYoungestClient();
+
+            // Assert
+            Assert.Equal(client3, youngestClient);
+        }
+
+        [Fact]
+        public void GetOldestClient_ReturnsOldestClient()
+        {
+            // Arrange
+            var clientStorage = new ClientStorage();
+            ClientService clientService;
+
+            var client1 = TestDataGenerator.GetClient();
+            client1.DateOfBirth = new DateTime(1990, 1, 1);
+            client1.PassportNumber = "AB123456";
+            var client2 = TestDataGenerator.GetClient();
+            client2.DateOfBirth = new DateTime(1985, 5, 10);
+            client2.PassportNumber = "AB123456";
+            var client3 = TestDataGenerator.GetClient();
+            client3.DateOfBirth = new DateTime(1995, 12, 20);
+            client3.PassportNumber = "AB123456";
+
+            clientStorage.Add(client1);
+            clientStorage.Add(client2);
+            clientStorage.Add(client3);
+            clientService = new ClientService(clientStorage);
+
+            // Act
+            var oldestClient = clientService.GetOldestClient();
+
+            // Assert
+            Assert.Equal(client2, oldestClient);
+        }
+
+        [Fact]
+        public void CalculateAverageAge_ReturnsAverageAge()
+        {
+            // Arrange
+            var clientStorage = new ClientStorage();
+            ClientService clientService;
+
+            var client1 = TestDataGenerator.GetClient();
+            client1.DateOfBirth = new DateTime(1990, 1, 1);
+            client1.PassportNumber = "AB123456";
+            var client2 = TestDataGenerator.GetClient();
+            client2.DateOfBirth = new DateTime(1985, 5, 10);
+            client2.PassportNumber = "AB123456";
+            var client3 = TestDataGenerator.GetClient();
+            client3.DateOfBirth = new DateTime(1995, 12, 20);
+            client3.PassportNumber = "AB123456";
+
+            clientStorage.Add(client1);
+            clientStorage.Add(client2);
+            clientStorage.Add(client3);
+            clientService = new ClientService(clientStorage);
+
+            // Act
+            var averageAge = clientService.CalculateAverageAge();
+
+            // Assert
+            Assert.Equal(33, (int)averageAge);
         }
     }
 }
