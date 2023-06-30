@@ -29,9 +29,9 @@ namespace ServicesDb.Storage
             if (Data.ContainsKey(employee))
             {
                 var employeeAccounts = Data[employee];
-                var existingAccount = employeeAccounts.FirstOrDefault(a => a.Currency == account.Currency);
+                var existingAccount = employeeAccounts.FirstOrDefault(a => a.CurrencyName == account.CurrencyName);
                 if (existingAccount != null)
-                    existingAccount.Amount = account.Amount;
+                    existingAccount.amount = account.amount;
             }
         }
 

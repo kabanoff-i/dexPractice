@@ -27,9 +27,9 @@ namespace ServicesDb.Storage
             if (Data.ContainsKey(client))
             {
                 var clientAccounts = Data[client];
-                var existingAccount = clientAccounts.FirstOrDefault(a => a.Currency == account.Currency);
+                var existingAccount = clientAccounts.FirstOrDefault(a => a.CurrencyName == account.CurrencyName);
                 if (existingAccount != null)
-                    existingAccount.Amount = account.Amount;
+                    existingAccount.amount = account.amount;
             }
         }
         public void DeleteAccount(Client client, Account account)

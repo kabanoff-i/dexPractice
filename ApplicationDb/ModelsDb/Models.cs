@@ -8,17 +8,18 @@ namespace ModelsDb
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string? PassportNumber { get; set; }
-        public double? Bonus { get; set; }
-        public Person(string name, string surname, DateTime date)
+        public Guid ID { get; set; }
+        public Person(string name, string surname, DateTime date, Guid ID)
         {
             Name = name;
             Surname = surname;
             DateOfBirth = date;
+            this.ID = ID;
         }
     }
     public class Employee : Person
     {
-        public Employee(string name, string surname, DateTime date, string contract, string jobTitle, int salary, DateTime dateOfHire) : base(name, surname, date)
+        public Employee(string name, string surname, DateTime date, int ID, string contract, string jobTitle, int salary, DateTime dateOfHire) : base(name, surname, date, ID)
         {
             Contract = contract;
             JobTitle = jobTitle;
@@ -35,7 +36,7 @@ namespace ModelsDb
             if (!(obj is Employee)) return false;
 
             var other = (Employee)obj;
-            return (other.Name == Name && other.Surname == Surname && other.Salary == Salary && other.DateOfBirth == DateOfBirth && other.DateOfHire == DateOfHire && other.JobTitle == JobTitle && other.Contract == Contract);
+            return (other.Name == Name && other.Surname == Surname && other.Salary == Salary && other.DateOfBirth == DateOfBirth && other.DateOfHire == DateOfHire && other.JobTitle == JobTitle && other.Contract == Contract && other.ID == ID);
         }
         public override int GetHashCode()
         {
@@ -49,19 +50,19 @@ namespace ModelsDb
                 hash = hash * 23 + DateOfHire.GetHashCode();
                 hash = hash * 23 + JobTitle.GetHashCode();
                 hash = hash * 23 + Contract.GetHashCode();
+                hash = hash * 23 + ID.GetHashCode();
                 return hash;
             }
         }
     }
     public class Client : Person
     {
-        public Client(string name, string surname, DateTime date, int clientID, string phoneNumber, string email) : base(name, surname, date)
+        public Client(string name, string surname, DateTime date, int clientID, string phoneNumber, string email) : base(name, surname, date, clientID)
         {
-            ClientID = clientID;
+            ID = ID;
             PhoneNumber = phoneNumber;
             Email = email;
         }
-        public int ClientID { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public override bool Equals(object? obj)
@@ -70,7 +71,7 @@ namespace ModelsDb
             if (!(obj is Client)) return false;
 
             var other = (Client)obj;
-            return (other.Name == Name && other.Surname == Surname && other.ClientID == ClientID && other.DateOfBirth == DateOfBirth && other.PhoneNumber == PhoneNumber && other.Email == Email);
+            return (other.Name == Name && other.Surname == Surname && other.ID == ID && other.DateOfBirth == DateOfBirth && other.PhoneNumber == PhoneNumber && other.Email == Email);
         }
         public override int GetHashCode()
         {
@@ -80,38 +81,32 @@ namespace ModelsDb
                 hash = hash * 23 + Name.GetHashCode();
                 hash = hash * 23 + Surname.GetHashCode();
                 hash = hash * 23 + DateOfBirth.GetHashCode();
-                hash = hash * 23 + ClientID.GetHashCode();
+                hash = hash * 23 + ID.GetHashCode();
                 hash = hash * 23 + PhoneNumber.GetHashCode();
                 hash = hash * 23 + Email.GetHashCode();
                 return hash;
             }
         }
     }
-    public struct Currency
+    public class Currency
     {
-        public string name;
-        public string symbol;
         public string code;
-        public string country;
-        public double exchangeRateToUSD;
-        public Currency(string name, string symbol, string code, string country, double exchangeRateToUSD)
+        public string symbol;
+        public Currency(string name, string symbol)
         {
-            this.name = name;
+            this.code = name;
             this.symbol = symbol;
-            this.code = code;
-            this.country = country;
-            this.exchangeRateToUSD = exchangeRateToUSD;
         }
     }
     public class Account
     {
         public string AccountNumber { get; set; }
-        public string Currency { get; set; }
+        public string CurrencyName { get; set; }
         public int Amount { get; set; }
         public Account(string accountNumber, string currency, int amount)
         {
             AccountNumber = accountNumber;
-            Currency = currency;
+            CurrencyName = currency;
             Amount = amount;
         }
     }

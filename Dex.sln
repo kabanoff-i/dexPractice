@@ -21,9 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OOP practice", "OOP practic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationDb", "ApplicationDb", "{2316E26E-F00C-4869-A730-BEA2FA369BFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelsDb", "ApplicationDb\ModelsDb\ModelsDb.csproj", "{11E5EBAE-76F7-4318-A985-137281BFB511}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelsDb", "ApplicationDb\ModelsDb\ModelsDb.csproj", "{11E5EBAE-76F7-4318-A985-137281BFB511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesDb", "ApplicationDb\ServicesDb\ServicesDb.csproj", "{469D3F12-DB28-4BBF-97E2-3467A488812A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesDb", "ApplicationDb\ServicesDb\ServicesDb.csproj", "{469D3F12-DB28-4BBF-97E2-3467A488812A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
