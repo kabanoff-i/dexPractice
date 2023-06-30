@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Exceprtions
+namespace ServicesDb.Exceptions
 {
     public class ClientUnderageException : Exception
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Models
+namespace ModelsDb
 {
     public abstract class Person
     {
@@ -8,7 +8,7 @@ namespace Models
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string? PassportNumber { get; set; }
-        public double? Bonus { get;  set; }
+        public double? Bonus { get; set; }
         public Person(string name, string surname, DateTime date)
         {
             Name = name;

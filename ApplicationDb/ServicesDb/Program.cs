@@ -5,13 +5,13 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Models;
+using ModelsDb;
 using Bogus;
 using System.Reflection;
-using Services.Exceprtions;
-using Services.Storage;
+using ServicesDb.Exceptions;
+using ServicesDb.Storage;
 
-namespace Services
+namespace ServicesDb
 {
     public class TestDataGenerator
     {
@@ -57,7 +57,7 @@ namespace Services
         }
         public static Dictionary<Client, Account> CreateAccountsDictionary(List<Client> clients)
         {
-            Dictionary < Client, Account> accountsDictionary = new Dictionary<Client, Account>();
+            Dictionary<Client, Account> accountsDictionary = new Dictionary<Client, Account>();
             foreach (Client client in clients)
             {
                 Faker faker = new Faker();
@@ -82,25 +82,25 @@ namespace Services
         private long income = 1340000;
         private int expenses = 43300;
         private int numberOfEmployee = 180;
-        List<Models.Person> BlackList = new List<Models.Person>();
+        List<ModelsDb.Person> BlackList = new List<ModelsDb.Person>();
         public void CalcSalary(Employee employee)
         {
             employee.Salary = (int)(income - expenses) / numberOfEmployee;
         }
         public Employee TurnIntoEmployee(Client client)
         {
-            Models.Person a = client;
+            ModelsDb.Person a = client;
             return (Employee)a;
         }
-        public void AddBonus<T>(T person) where T: Models.Person
+        public void AddBonus<T>(T person) where T : ModelsDb.Person
         {
             person.Bonus = income * 0.05;
         }
-        public void AddToBlackList<T> (T person) where T: Models.Person
+        public void AddToBlackList<T>(T person) where T : ModelsDb.Person
         {
             BlackList.Add(person);
         }
-        public bool IsPersonInBlackList<T>(T person) where T: Models.Person
+        public bool IsPersonInBlackList<T>(T person) where T : ModelsDb.Person
         {
             return BlackList.Contains(person);
         }
@@ -283,7 +283,7 @@ namespace Services
         private Account CreateDefaultAccount()
         {
             string accountNumber = Guid.NewGuid().ToString();
-            return new Account(accountNumber,"$", 0);
+            return new Account(accountNumber, "$", 0);
         }
 
         //IEnumerable
