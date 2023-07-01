@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelsDb
 {
@@ -8,24 +10,27 @@ namespace ModelsDb
         public string surname { get; set; }
         public DateTime dateOfBirth { get; set; }
         public string? passportNumber { get; set; }
+        [Key]
         public Guid id { get; set; }
-        public Person(string name, string surname, DateTime date, Guid ID)
+        public Person(string name, string surname, DateTime dateOfBirth, Guid id)
         {
             this.name = name;
             this.surname = surname;
-            dateOfBirth = date;
-            this.id = ID;
+            this.dateOfBirth = dateOfBirth;
+            this.id = id;
         }
+        public Person() { }
     }
     public class Employee : Person
     {
-        public Employee(string name, string surname, DateTime date, Guid ID, string contract, string jobTitle, int salary, DateTime dateOfHire) : base(name, surname, date, ID)
+        public Employee(string name, string surname, DateTime dateOfBirth, Guid id, string contract, string jobTitle, int salary, DateTime dateOfHire) : base(name, surname, dateOfBirth, id)
         {
             this.contract = contract;
             this.jobTitle = jobTitle;
             this.salary = salary;
             this.dateOfHire = dateOfHire;
         }
+        public Employee() { }
         public string contract { get; set; }
         public string jobTitle { get; set; }
         public int salary { get; set; }
@@ -57,14 +62,16 @@ namespace ModelsDb
     }
     public class Client : Person
     {
-        public Client(string name, string surname, DateTime date, Guid clientID, string phoneNumber, string email) : base(name, surname, date, clientID)
+        public Client(string name, string surname, DateTime dateOfBirth, Guid id, string phoneNumber, string email) : base(name, surname, dateOfBirth, id)
         {
-            id = clientID;
+            this.id = id;
             this.phoneNumber = phoneNumber;
             this.email = email;
         }
+        public Client() { }
         public string phoneNumber { get; set; }
         public string email { get; set; }
+        public virtual ICollection<Account> accounts { get; set; }
         public override bool Equals(object? obj)
         {
             if (obj == null) return false;
@@ -90,26 +97,42 @@ namespace ModelsDb
     }
     public class Currency
     {
-        public string code;
-        public string symbol;
-        public Currency(string name, string symbol)
+        [Key]
+        public string code { get; set; }
+        public char symbol { get; set; }
+        [InverseProperty("currency")]
+        public virtual ICollection<Account> accounts { get; set; }
+        public Currency(string code, char symbol)
         {
-            this.code = name;
+            this.code = code;
             this.symbol = symbol;
         }
+        public Currency() { }
     }
     public class Account
     {
+        [Key]
         public Guid accountNumber { get; set; }
+        [Display(Name = "currency")]
         public string currencyName { get; set; }
+        [Display(Name = "client")]
         public Guid clientId { get; set; }
         public int amount { get; set; }
-        public Account(Guid accountNumber, string currency, Guid guid, int amount)
+        [ForeignKey("clientId")]
+        [InverseProperty("accounts")]
+        public virtual Client client { get; set; }
+        [ForeignKey("currencyName")]
+        [InverseProperty("accounts")]
+        public virtual Currency currency { get; set; }
+        public Account(Guid accountNumber, string currencyName, Guid clientId, int amount, Client client, Currency currency)
         {
             this.accountNumber = accountNumber;
-            clientId = guid;
-            this.currencyName = currency;
+            this.clientId = clientId;
+            this.currencyName = currencyName;
             this.amount = amount;
+            this.client = client;
+            this.currency = currency;
         }
+        public Account() { }
     }
 }

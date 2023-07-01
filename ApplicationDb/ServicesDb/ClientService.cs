@@ -10,10 +10,14 @@ namespace ServicesDb
 {
     public class ClientService
     {
-        ApplicationContext _dbContext;
+        BankServiceContext _dbContext;
+        public ClientService(BankServiceContext dbContext)
+        {
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        }
         public ClientService()
         {
-            _dbContext = new ApplicationContext();
+            _dbContext = new BankServiceContext();
         }
         //client
         public Client GetClient(Guid clientId)
@@ -71,7 +75,7 @@ namespace ServicesDb
         }
         private Account CreateDefaultAccount(Client client)
         {
-            return new Account(Guid.NewGuid(), "USD", client.id, 0);
+            return new Account(Guid.NewGuid(), "USD", client.id, 0, client, new Currency("USD", '$'));
         }
     }
 }

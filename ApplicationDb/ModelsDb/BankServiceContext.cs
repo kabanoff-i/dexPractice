@@ -7,15 +7,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ModelsDb
 {
-    public class ApplicationContext : DbContext
+    public class BankServiceContext : DbContext
     {
         public DbSet<Client> client { get; set; }
         public DbSet<Employee> employee { get; set; }
         public DbSet<Account> account { get; set; }
         public DbSet<Currency> currency { get; set; }
-        public ApplicationContext()
+        public BankServiceContext()
         {
-            Database.EnsureCreated();
+
+        }
+        public BankServiceContext(DbContextOptions<BankServiceContext> options): base(options) 
+        {
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

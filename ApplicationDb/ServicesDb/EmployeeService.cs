@@ -10,10 +10,10 @@ namespace ServicesDb
 {
     public class EmployeeService
     {
-        ApplicationContext _dbContext;
+        BankServiceContext _dbContext;
         public EmployeeService()
         {
-            _dbContext = new ApplicationContext();
+            _dbContext = new BankServiceContext();
         }
         //employee
         public Employee GetEmployee(Guid employeeId)
