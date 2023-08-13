@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExportTool", "Other\ExportT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions practice", "Other\Extensions practice\Extensions practice.csproj", "{C298ABC2-911D-4AAD-AD34-9E1767267355}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflection plactice", "Other\Reflection plactice\Reflection plactice.csproj", "{56D63CDB-5BAF-4874-9165-CEF014665B1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reflection plactice", "Other\Reflection plactice\Reflection plactice.csproj", "{56D63CDB-5BAF-4874-9165-CEF014665B1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

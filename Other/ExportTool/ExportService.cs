@@ -1,5 +1,4 @@
-﻿using Models;
-using CsvHelper;
+﻿    using CsvHelper;
 using System.Globalization;
 
 namespace ExportTool
@@ -14,7 +13,7 @@ namespace ExportTool
             _csvFileName = csvFileName;
         }
 
-        public void ImportDBToCSV(List<Client> clients)
+        public void ImportDBToCSV<T>(IEnumerable<T> persons)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(_pathToDirectory);
             if (!dirInfo.Exists)
@@ -28,19 +27,19 @@ namespace ExportTool
                 {
                     using (var writer = new CsvWriter(streamWriter, CultureInfo.InvariantCulture))
                     {
-                        writer.WriteRecords(clients);
+                        writer.WriteRecords(persons);
                     }
                 }
             }
         }
         //if it is necessary to change the csv file
-        public List<Client> ImportCSVToDB(string pathToDirectory, string csvFileName)
+        public IEnumerable<T> ImportCSVToDB<T>(string pathToDirectory, string csvFileName)
         {
             _pathToDirectory = pathToDirectory;
             _csvFileName = csvFileName;
-            return ImportCSVToDB();
+            return ImportCSVToDB<T>();
         }
-        public List<Client> ImportCSVToDB()
+        public List<T> ImportCSVToDB<T>()
         {
             DirectoryInfo dirInfo = new DirectoryInfo(_pathToDirectory);
             if (!dirInfo.Exists)
@@ -54,7 +53,7 @@ namespace ExportTool
                 {
                     using (var reader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
                     {
-                        return (List<Client>) reader.GetRecords<Client>();
+                        return  reader.GetRecords<T>().ToList();
                     }
                 }
             }

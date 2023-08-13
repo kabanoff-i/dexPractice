@@ -20,6 +20,10 @@ namespace ServicesDb
         {
             return _dbContext.employee.FirstOrDefault(c => c.id == employeeId);
         }
+        public List<Employee> GetEmployees()
+        {
+            return _dbContext.employee.ToList();
+        }
         public void AddEmployee(Employee employee)
         {
             _dbContext.employee.Add(employee);
