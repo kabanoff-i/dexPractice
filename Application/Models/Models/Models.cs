@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Models
+﻿namespace Models
 {
     public abstract class Person
     {

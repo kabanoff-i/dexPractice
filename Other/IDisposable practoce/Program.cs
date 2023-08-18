@@ -1,7 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 using Npgsql;
-using System.Data.SqlClient;
-using System.Configuration;
 
 public class ConnectionAndMemory : IDisposable
 {
