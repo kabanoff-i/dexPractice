@@ -1,4 +1,5 @@
-﻿using ModelsDb;
+﻿using Microsoft.EntityFrameworkCore;
+using ModelsDb;
 using ServicesDb.Exceptions;
 
 namespace ServicesDb
@@ -15,62 +16,63 @@ namespace ServicesDb
             _dbContext = new BankServiceContext();
         }
         //client
-        public Client GetClient(Guid clientId)
+        public async Task<Client?> GetClientAsync(Guid clientId)
         {
-            return _dbContext.client.FirstOrDefault(c => c.id == clientId);
+            return await _dbContext.client.FirstOrDefaultAsync(c => c.id == clientId);
         }
-        public void AddClient(Client client)
+        public async Task AddClientAsync(Client client)
         {
-            _dbContext.client.Add(client);
-            _dbContext.account.Add(CreateDefaultAccount(client));
-            _dbContext.SaveChanges();
+            await _dbContext.client.AddAsync(client);
+            await _dbContext.SaveChangesAsync();
+            await _dbContext.account.AddAsync(CreateDefaultAccount(client));
+            await _dbContext.SaveChangesAsync();
         }
-        public void ChangeClient(Guid clientId)
+        public async Task ChangeClientAsync(Guid clientId)
         {
-            Client client = _dbContext.client.FirstOrDefault(c => c.id == clientId);
+            Client? client = _dbContext.client.FirstOrDefaultAsync(c => c.id == clientId).Result;
             if (client == null)
             {
                 throw new ClientNotFoundException("Client not found");
             }
 
             client.surname += " changed";
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
-        public void DeleteClient(Guid clientId)
+        public async Task DeleteClientAsync(Guid clientId)
         {
-            Client client = _dbContext.client.FirstOrDefault(c => c.id == clientId);
+            Client? client = _dbContext.client.FirstOrDefaultAsync(c => c.id == clientId).Result;
             if (client == null)
             {
                 throw new ClientNotFoundException("Client not found");
             }
 
             _dbContext.client.Remove(client);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
         }
         //account
-        public void AddAccount(Guid clientId)
+        public async Task AddAccountAsync(Guid clientId)
         {
-            if (_dbContext.client.Find(clientId) != null)
+            if (_dbContext.client.FindAsync(clientId).Result != null)
             {
                 throw new ClientNotFoundException("Client not found");
             }
 
-            _dbContext.account.Add(CreateDefaultAccount(_dbContext.client.Find(clientId)));
-            _dbContext.SaveChanges();
+            await _dbContext.account.AddAsync(CreateDefaultAccount(_dbContext.client.FindAsync(clientId).Result));
+            await _dbContext.SaveChangesAsync();
         }
-        public void DeleteAccount(Guid AccountId)
+        public async Task DeleteAccountAsync(Guid AccountId)
         {
-            var account = _dbContext.account.FirstOrDefault(c => c.accountNumber == AccountId);
+            Account? account = _dbContext.account.FirstOrDefaultAsync(c => c.accountNumber == AccountId).Result;
             if (account == null)
                 throw new AccountNotFoundException("Account not found");
 
             _dbContext.account.Remove(account);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
         private Account CreateDefaultAccount(Client client)
         {
-            return new Account(Guid.NewGuid(), "USD", client.id, 0, client, new Currency("USD", '$'));
+            return new Account(Guid.NewGuid(), "USDA", client.id, 0, client, new Currency("USDA", '$'));
         }
     }
 }

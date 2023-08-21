@@ -1,5 +1,6 @@
 ﻿using ModelsDb;
 using ServicesDb.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace ServicesDb
 {
@@ -11,39 +12,39 @@ namespace ServicesDb
             _dbContext = new BankServiceContext();
         }
         //employee
-        public Employee GetEmployee(Guid employeeId)
+        public  async Task<Employee?> GetEmployeeAsync(Guid employeeId)
         {
-            return _dbContext.employee.FirstOrDefault(c => c.id == employeeId);
+            return await _dbContext.employee.FirstOrDefaultAsync(c => c.id == employeeId);
         }
-        public List<Employee> GetEmployees()
+        public async Task<List<Employee>> GetEmployeesAsync()
         {
-            return _dbContext.employee.ToList();
+            return await _dbContext.employee.ToListAsync();
         }
-        public void AddEmployee(Employee employee)
+        public async Task AddEmployeeAsync(Employee employee)
         {
-            _dbContext.employee.Add(employee);
-            _dbContext.SaveChanges();
+            await _dbContext.employee.AddAsync(employee);
+            await _dbContext.SaveChangesAsync();
         }
-        public void ChangeEmployee(Guid employeeId)
+        public async Task ChangeEmployeeAsync(Guid employeeId)
         {
-            Employee employee = _dbContext.employee.FirstOrDefault(c => c.id == employeeId);
+            Employee? employee = await _dbContext.employee.FirstOrDefaultAsync(c => c.id == employeeId);
             if (employee == null)
             {
                 throw new EmployeeNotFoundException("Employee not found");
             }
             employee.surname += " changed";
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
-        public void DeleteEmployee(Guid employeeId)
+        public async Task DeleteEmployeeAsync(Guid employeeId)
         {
-            Employee employee = _dbContext.employee.FirstOrDefault(c => c.id == employeeId);
+            Employee? employee = await _dbContext.employee.FirstOrDefaultAsync(c => c.id == employeeId);
             if (employee == null)
             {
                 throw new EmployeeNotFoundException("Employee not found");
             }
 
             _dbContext.employee.Remove(employee);
-
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
