@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions practice", "Othe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reflection plactice", "Other\Reflection plactice\Reflection plactice.csproj", "{56D63CDB-5BAF-4874-9165-CEF014665B1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAPI", "API\BankAPI\BankAPI.csproj", "{95DBD650-29F1-4C48-805A-70B113380CAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{56D63CDB-5BAF-4874-9165-CEF014665B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56D63CDB-5BAF-4874-9165-CEF014665B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56D63CDB-5BAF-4874-9165-CEF014665B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95DBD650-29F1-4C48-805A-70B113380CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95DBD650-29F1-4C48-805A-70B113380CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95DBD650-29F1-4C48-805A-70B113380CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95DBD650-29F1-4C48-805A-70B113380CAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
