@@ -11,10 +11,7 @@ public class ConnectionAndMemory : IDisposable
     private bool _isFreed;
     private NpgsqlConnection GetConnection()
     {
-        // Получаем строку подключения из конфигурации
-        //var connectionString = ConfigurationManager.ConnectionStrings["Postgres"].ConnectionString;
         var connectionString = "Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=sewdaw;";
-        //Создаем соединение
         var connection = new NpgsqlConnection(connectionString);
         return connection;
     }
@@ -33,7 +30,7 @@ public class ConnectionAndMemory : IDisposable
         TotalFreed += _chunkSize;
         _isFreed = true;
     }
-    public void DoWork() { } // Фиктивный метод. Подразумевается, что здесь вы работаете с ресурсами.
+    public void DoWork() { } 
 protected virtual void Dispose(bool disposing)
     {
         ReleaseUnmanagedResources();

@@ -8,7 +8,7 @@ namespace ServicesdbTests.Tests
     public class ThreadAndTaskTests
     {
         [Fact]
-        public void ParallelImportAndExporTest()
+        public void ParallelImportAndExportTest()
         {
             ExportService exportService = new(Environment.CurrentDirectory, "export.csv");
             ExportService importService = new(Environment.CurrentDirectory, "import.csv");
@@ -48,7 +48,9 @@ namespace ServicesdbTests.Tests
             {
                 lock (locker)
                 {
-                    bool? difference = exportService.ImportCSVToDB<Employee>().Except(importService.ImportCSVToDB<Employee>()).Any();
+                    List<Employee> export = exportService.ImportCSVToDB<Employee>();
+                    List<Employee> import = importService.ImportCSVToDB<Employee>();
+                    bool? difference = export.Except(import).Any();
                     Assert.False(difference);
                 }
             }

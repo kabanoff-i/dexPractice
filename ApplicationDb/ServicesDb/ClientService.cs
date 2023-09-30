@@ -23,7 +23,6 @@ namespace ServicesDb
         public async Task AddClientAsync(Client client)
         {
             await _dbContext.client.AddAsync(client);
-            await _dbContext.SaveChangesAsync();
             await _dbContext.account.AddAsync(CreateDefaultAccount(client));
             await _dbContext.SaveChangesAsync();
         }
@@ -72,7 +71,7 @@ namespace ServicesDb
         }
         private Account CreateDefaultAccount(Client client)
         {
-            return new Account(Guid.NewGuid(), "USDA", client.id, 0, client, new Currency("USDA", '$'));
+            return new Account(Guid.NewGuid(), "USD", client.id, 0, client, _dbContext.currency.FirstOrDefault(a => a.code == "USD"));
         }
     }
 }

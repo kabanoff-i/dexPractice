@@ -1,5 +1,8 @@
-﻿using Xunit;
+﻿using ServicesDb;
+using Xunit;
 using Xunit.Abstractions;
+using ModelsDb;
+using Microsoft.Data.SqlClient;
 
 namespace ServicesdbTests.Tests
 {
@@ -30,6 +33,63 @@ namespace ServicesdbTests.Tests
             output.WriteLine($"Свободных потоков {avThreads} {avIOThreads}");
             await Task.Delay(2000);
             output.WriteLine($"Завершение {taskNumber} задачи");
+        }
+        [Fact]
+        public async Task UpdateRate_ShouldUpdateClientRates()
+        {
+            //Arrange
+            RateUpdater rateUpdater = new RateUpdater();
+            List<Client> clients = new List<Client> { DataGenerator.GetClient(), DataGenerator.GetClient(), DataGenerator.GetClient() };
+            foreach (Client client in clients) 
+            {
+                client.accounts.Add(new Account() { amount = 1000 });
+            }
+            
+            //Act
+            await rateUpdater.UpdateRateAsync( clients );
+
+            //assert
+            foreach (Client client in clients)
+            {
+                foreach (Account account in client.accounts)
+                {
+                    Assert.NotEqual(1000, account.amount);
+                }
+            }
+        }
+        [Fact]
+        public async Task DispenseCash_ShouldDispenceAllAccounts()
+        {
+            //Arrange
+            CashDispenserService cashDispenserService = new CashDispenserService();
+            List<Client> clients = new List<Client>() 
+            {
+                DataGenerator.GetClient(),
+                DataGenerator.GetClient(),
+                DataGenerator.GetClient(),
+                DataGenerator.GetClient(),
+                DataGenerator.GetClient(),
+                DataGenerator.GetClient(),
+                DataGenerator.GetClient(),
+            };
+            foreach (Client client in clients)
+            {
+                client.accounts.Add(new Account());
+                client.accounts.First().amount = 1000;
+            }
+
+            //Act
+            await cashDispenserService.DispenseCash(4, clients );
+
+
+            //assert
+            foreach (Client client in clients)
+            {
+                foreach (Account account in client.accounts)
+                {
+                    Assert.NotEqual(1000, account.amount);
+                }
+            }
         }
     }
 }

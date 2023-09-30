@@ -4,7 +4,7 @@ namespace ServicesDb
 {
     public class CashDispenserService
     {
-        async Task DispenseCash(int n, List<Client> clients)
+        public async Task DispenseCash(int n, List<Client> clients)
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(n);
             List<Task> tasks = new();

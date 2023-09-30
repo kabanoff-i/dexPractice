@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ServicesDb;
 using ModelsDb;
-using ExportTool;
-using System.Reflection.Metadata.Ecma335;
-using NuGet.Protocol;
 using Microsoft.AspNetCore.Http.Extensions;
 
 namespace BankAPI.Controllers

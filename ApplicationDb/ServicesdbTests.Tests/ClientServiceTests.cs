@@ -59,5 +59,57 @@ namespace ServicesdbTests.Tests
                 Assert.Equal("Client not found", exception.Message);
             }
         }
+        [Fact]
+        public async Task GetClient_ShouldGetClientById()
+        {
+            // Arrange
+            using (BankServiceContext dbContext = new())
+            {
+                var clientService = new ClientService(dbContext);
+                var client = DataGenerator.GetClient();
+                await clientService.AddClientAsync(client);
+
+                // Act
+                Client newClient = await clientService.GetClientAsync(client.id);
+
+                // Assert
+                Assert.Equal(client, newClient);
+            }
+        }
+        [Fact]
+        public async Task DeleteClient_ShouldDeleteClientById()
+        {
+            // Arrange
+            using (BankServiceContext dbContext = new())
+            {
+                var clientService = new ClientService(dbContext);
+                var client = DataGenerator.GetClient();
+                await clientService.AddClientAsync(client);
+
+                // Act
+                await clientService.DeleteClientAsync(client.id);
+
+                // Assert
+                Assert.Null(clientService.GetClientAsync(client.id).Result);
+            }
+        }
+        [Fact]
+        public async Task DeleteAccount_ShouldDeleteAccountById()
+        {
+            // Arrange
+            using (BankServiceContext dbContext = new())
+            {
+                var clientService = new ClientService(dbContext);
+                var client = DataGenerator.GetClient();
+                await clientService.AddClientAsync(client);
+                Account account = client.accounts.FirstOrDefault();
+
+                // Act
+                await clientService.DeleteAccountAsync(account.accountNumber);
+
+                // Assert
+                Assert.Null(dbContext.account.FirstOrDefault(a => a.accountNumber == account.accountNumber));
+            }
+        }
     }
 }

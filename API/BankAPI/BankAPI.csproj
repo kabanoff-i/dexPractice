@@ -20,6 +20,7 @@
     <ProjectReference Include="..\..\ApplicationDb\ModelsDb\ModelsDb.csproj" />
     <ProjectReference Include="..\..\ApplicationDb\ServicesDb\ServicesDb.csproj" />
     <ProjectReference Include="..\..\Other\ExportTool\ExportTool.csproj" />
+    <ProjectReference Include="..\CurrencyService\CurrencyService.csproj" />
   </ItemGroup>
 
 </Project>
