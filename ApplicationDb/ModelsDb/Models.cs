@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelsDb
@@ -41,7 +40,14 @@ namespace ModelsDb
             if (!(obj is Employee)) return false;
 
             var other = (Employee)obj;
-            return (other.name == name && other.surname == surname && other.salary == salary && other.dateOfBirth == dateOfBirth && other.dateOfHire == dateOfHire && other.jobTitle == jobTitle && other.contract == contract && other.id == id);
+            return (other.name == name && 
+                other.surname == surname && 
+                other.salary == salary && 
+                other.dateOfBirth == dateOfBirth && 
+                other.dateOfHire == dateOfHire && 
+                other.jobTitle == jobTitle && 
+                other.contract == contract && 
+                other.id == id);
         }
         public override int GetHashCode()
         {
@@ -67,6 +73,7 @@ namespace ModelsDb
             this.id = id;
             this.phoneNumber = phoneNumber;
             this.email = email;
+            accounts = new List<Account>();
         }
         public Client() { }
         public string phoneNumber { get; set; }
@@ -78,7 +85,12 @@ namespace ModelsDb
             if (!(obj is Client)) return false;
 
             var other = (Client)obj;
-            return (other.name == name && other.surname == surname && other.id == id && other.dateOfBirth == dateOfBirth && other.phoneNumber == phoneNumber && other.email == email);
+            return (other.name == name && 
+                other.surname == surname && 
+                other.id == id && 
+                other.dateOfBirth == dateOfBirth && 
+                other.phoneNumber == phoneNumber && 
+                other.email == email);
         }
         public override int GetHashCode()
         {

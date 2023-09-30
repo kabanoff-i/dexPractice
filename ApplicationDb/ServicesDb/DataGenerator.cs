@@ -1,10 +1,4 @@
-﻿using Bogus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ModelsDb;
+﻿using ModelsDb;
 
 namespace ServicesDb
 {
@@ -19,6 +13,10 @@ namespace ServicesDb
         {
             var person = new Bogus.Person();
             return new Employee(person.FirstName, person.LastName, person.DateOfBirth, Guid.NewGuid(), person.Company.Name, person.Company.Name, new Random().Next(3000), person.DateOfBirth);
+        }
+        public static Account GetAccount(Client client, Currency currency)
+        {
+            return new Account(Guid.NewGuid(), currency.code, client.id, 0, client, currency);
         }
     }
 }

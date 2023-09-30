@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ModelsDb
 {
@@ -15,15 +10,15 @@ namespace ModelsDb
         public DbSet<Currency> currency { get; set; }
         public BankServiceContext()
         {
-
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
         public BankServiceContext(DbContextOptions<BankServiceContext> options): base(options) 
         {
-
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost; Port = 5432; Database = bankServiceMigr; Username = postgres; Password = 12345678");
+            optionsBuilder.UseNpgsql("Host=localhost; Port = 5432; Database = bankService; Username = postgres; Password = sewdaw");
         }
     }
 }

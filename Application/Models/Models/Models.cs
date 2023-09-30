@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Models
+﻿namespace Models
 {
     public abstract class Person
     {
@@ -35,7 +33,13 @@ namespace Models
             if (!(obj is Employee)) return false;
 
             var other = (Employee)obj;
-            return (other.Name == Name && other.Surname == Surname && other.Salary == Salary && other.DateOfBirth == DateOfBirth && other.DateOfHire == DateOfHire && other.JobTitle == JobTitle && other.Contract == Contract);
+            return (other.Name == Name && 
+                other.Surname == Surname && 
+                other.Salary == Salary && 
+                other.DateOfBirth == DateOfBirth && 
+                other.DateOfHire == DateOfHire && 
+                other.JobTitle == JobTitle && 
+                other.Contract == Contract);
         }
         public override int GetHashCode()
         {
@@ -70,7 +74,12 @@ namespace Models
             if (!(obj is Client)) return false;
 
             var other = (Client)obj;
-            return (other.Name == Name && other.Surname == Surname && other.ClientID == ClientID && other.DateOfBirth == DateOfBirth && other.PhoneNumber == PhoneNumber && other.Email == Email);
+            return (other.Name == Name && 
+                other.Surname == Surname && 
+                other.ClientID == ClientID && 
+                other.DateOfBirth == DateOfBirth && 
+                other.PhoneNumber == PhoneNumber && 
+                other.Email == Email);
         }
         public override int GetHashCode()
         {
