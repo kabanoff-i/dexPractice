@@ -1,0 +1,1073 @@
+{
+	"info": {
+		"_postman_id": "6ca0f317-5494-4c60-90b4-84ee5ba965a3",
+		"name": "BankAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29989901"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "ClientService",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "getClientById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"\r",
+													"    pm.environment.set(\"surname\", pm.response.json().surname);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ClientService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ClientService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "getChangedClientById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"pm.test(\"Client was changed\", function () {\r",
+													"    try {\r",
+													"    let surnameChanged = pm.response.json().surname;\r",
+													"    console.log(surnameChanged);\r",
+													"    let surname = pm.environment.get(\"surname\");\r",
+													"    console.log(surname);\r",
+													"    pm.expect(surnameChanged).to.eql(surname + \" changed\");\r",
+													"    }\r",
+													"    catch (e)\r",
+													"    {\r",
+													"        console.log(e);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ClientService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ClientService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "getDeletedClientById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {\r",
+													"    pm.response.to.have.status(204);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ClientService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ClientService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "changeClientById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ClientService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ClientService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "DeleteClientById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {\r",
+													"    pm.response.to.have.status(204);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ClientService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ClientService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "CreateClient",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Тестируем статус ответа и формат\r",
+											"pm.test(\"Status code is 201, response is json\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"try {\r",
+											"    // сохраняем id из json ответа в переменную окружения\r",
+											"    pm.environment.set(\"id\", pm.response.json().id);\r",
+											"} catch(e) {\r",
+											"    // выводим исключение в консоль\r",
+											"    console.log(e);\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"string\",\n  \"surname\": \"string\",\n  \"dateOfBirth\": \"{{randomDateTime}}\",\n  \"passportNumber\": \"string\",\n  \"id\": \"{{$guid}}\",\n  \"phoneNumber\": \"string\",\n  \"email\": \"fkldfkdlfd\",\n  \"accounts\":[]\n\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/ClientService",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"ClientService"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"dateOfBirth\": \"<dateTime>\",\n  \"passportNumber\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"phoneNumber\": \"<string>\",\n  \"email\": \"<string>\",\n  \"accounts\": [\n    {\n      \"accountNumber\": \"<uuid>\",\n      \"currencyName\": \"<string>\",\n      \"clientId\": \"<uuid>\",\n      \"amount\": \"<integer>\",\n      \"client\": {\n        \"value\": \"<Circular reference to #/components/schemas/Client detected>\"\n      },\n      \"currency\": {\n        \"code\": \"<string>\",\n        \"symbol\": \"<string>\",\n        \"accounts\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Account detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Account detected>\"\n          }\n        ]\n      }\n    },\n    {\n      \"accountNumber\": \"<uuid>\",\n      \"currencyName\": \"<string>\",\n      \"clientId\": \"<uuid>\",\n      \"amount\": \"<integer>\",\n      \"client\": {\n        \"value\": \"<Circular reference to #/components/schemas/Client detected>\"\n      },\n      \"currency\": {\n        \"code\": \"<string>\",\n        \"symbol\": \"<string>\",\n        \"accounts\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Account detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Account detected>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/ClientService",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ClientService"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Currency",
+					"item": [
+						{
+							"name": "Exchange",
+							"item": [
+								{
+									"name": "/api/Currency/Exchange",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Currency/Exchange?to={{$randomCurrencyCode}}&from={{$randomCurrencyCode}}&amount={{$randomInt}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Currency",
+												"Exchange"
+											],
+											"query": [
+												{
+													"key": "to",
+													"value": "{{$randomCurrencyCode}}"
+												},
+												{
+													"key": "from",
+													"value": "{{$randomCurrencyCode}}"
+												},
+												{
+													"key": "amount",
+													"value": "{{$randomInt}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Currency/Exchange?to=<string>&from=<string>&amount=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Currency",
+														"Exchange"
+													],
+													"query": [
+														{
+															"key": "to",
+															"value": "<string>"
+														},
+														{
+															"key": "from",
+															"value": "<string>"
+														},
+														{
+															"key": "amount",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": \"<integer>\",\n  \"errorMessage\": \"<string>\",\n  \"amount\": \"<double>\"\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "EmployeeService",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "getEmployeeById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"\r",
+													"    pm.environment.set(\"surname\", pm.response.json().surname);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/EmployeeService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"EmployeeService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "getChangedEmployeeById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"pm.test(\"Client was changed\", function () {\r",
+													"    try {\r",
+													"    let surnameChanged = pm.response.json().surname;\r",
+													"    console.log(surnameChanged);\r",
+													"    let surname = pm.environment.get(\"surname\");\r",
+													"    console.log(surname);\r",
+													"    pm.expect(surnameChanged).to.eql(surname + \" changed\");\r",
+													"    }\r",
+													"    catch (e)\r",
+													"    {\r",
+													"        console.log(e);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/EmployeeService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"EmployeeService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "getDeletedEmployeeById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {\r",
+													"    pm.response.to.have.status(204);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/EmployeeService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"EmployeeService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "changeClientById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/EmployeeService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"EmployeeService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "DeleteEmployeeById",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {\r",
+													"    pm.response.to.have.status(204);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/EmployeeService/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"EmployeeService",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/ClientService/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"ClientService",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "CreateEmployee",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Тестируем статус ответа и формат\r",
+											"pm.test(\"Status code is 201, response is json\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"try {\r",
+											"    // сохраняем id из json ответа в переменную окружения\r",
+											"    pm.environment.set(\"id\", pm.response.json().id);\r",
+											"} catch(e) {\r",
+											"    // выводим исключение в консоль\r",
+											"    console.log(e);\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"dateOfBirth\": \"{{randomDateTime}}\",\n  \"passportNumber\": \"<string>\",\n  \"id\": \"{{$guid}}\",\n  \"contract\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"salary\": \"{{$randomInt}}\",\n  \"dateOfHire\": \"{{randomDateTime}}\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/EmployeeService",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"EmployeeService"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"dateOfBirth\": \"<dateTime>\",\n  \"passportNumber\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"phoneNumber\": \"<string>\",\n  \"email\": \"<string>\",\n  \"accounts\": [\n    {\n      \"accountNumber\": \"<uuid>\",\n      \"currencyName\": \"<string>\",\n      \"clientId\": \"<uuid>\",\n      \"amount\": \"<integer>\",\n      \"client\": {\n        \"value\": \"<Circular reference to #/components/schemas/Client detected>\"\n      },\n      \"currency\": {\n        \"code\": \"<string>\",\n        \"symbol\": \"<string>\",\n        \"accounts\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Account detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Account detected>\"\n          }\n        ]\n      }\n    },\n    {\n      \"accountNumber\": \"<uuid>\",\n      \"currencyName\": \"<string>\",\n      \"clientId\": \"<uuid>\",\n      \"amount\": \"<integer>\",\n      \"client\": {\n        \"value\": \"<Circular reference to #/components/schemas/Client detected>\"\n      },\n      \"currency\": {\n        \"code\": \"<string>\",\n        \"symbol\": \"<string>\",\n        \"accounts\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Account detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Account detected>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/ClientService",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ClientService"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Define the date range (you can adjust this as needed)",
+					"const startDate = new Date('1950-01-01');",
+					"const endDate = new Date('2023-12-31');",
+					"",
+					"// Generate a random datetime within the range",
+					"const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());",
+					"const randomDate = new Date(randomTime);",
+					"",
+					"// Format the datetime as needed (e.g., ISO format)",
+					"const formattedRandomDate = randomDate.toJSON();",
+					"",
+					"// Set the environment variable with the random datetime",
+					"pm.environment.set('randomDateTime', formattedRandomDate);",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
