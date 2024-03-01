@@ -1,0 +1,214 @@
+{
+	"id": "a39866e3-e0d5-4207-b913-af5b25bf1f79",
+	"name": "BankAPI",
+	"timestamp": "2023-09-28T20:22:38.943Z",
+	"collection_id": "29989901-6ca0f317-5494-4c60-90b4-84ee5ba965a3",
+	"folder_id": "29989901-50a86c2c-ecd6-40d9-85f4-b33d2cf0afe9",
+	"environment_id": "29989901-c63232b3-b723-435a-944a-2938f68370ea",
+	"totalPass": 7,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-09-28T20:22:35.910Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "73937f5b-df8b-4658-a3a4-145895a69f91",
+			"name": "CreateEmployee",
+			"url": "https://localhost:7169/api/EmployeeService",
+			"time": 1598,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201, response is json": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201, response is json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1598
+			],
+			"allTests": [
+				{
+					"Status code is 201, response is json": true
+				}
+			]
+		},
+		{
+			"id": "7f886efe-d437-4d4e-aceb-ff884c144c83",
+			"name": "getEmployeeById",
+			"url": "https://localhost:7169/api/EmployeeService/85338090-8a4a-496f-afcd-255ebcecaa08",
+			"time": 447,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				447
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "2eb122dc-46fe-49da-af5b-2ec4dff6aaae",
+			"name": "changeClientById",
+			"url": "https://localhost:7169/api/EmployeeService/85338090-8a4a-496f-afcd-255ebcecaa08",
+			"time": 31,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				31
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "80269dcf-a73d-41e5-9b52-ef73fd5712a7",
+			"name": "getChangedEmployeeById",
+			"url": "https://localhost:7169/api/EmployeeService/85338090-8a4a-496f-afcd-255ebcecaa08",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Client was changed": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Client was changed": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Client was changed": true
+				}
+			]
+		},
+		{
+			"id": "f7cf35e6-84be-4941-9c24-68069d849aad",
+			"name": "DeleteEmployeeById",
+			"url": "https://localhost:7169/api/EmployeeService/85338090-8a4a-496f-afcd-255ebcecaa08",
+			"time": 10,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 204": true
+				}
+			]
+		},
+		{
+			"id": "cd8aef84-9dca-4e1a-8b1b-6cd8135b4964",
+			"name": "getDeletedEmployeeById",
+			"url": "https://localhost:7169/api/EmployeeService/85338090-8a4a-496f-afcd-255ebcecaa08",
+			"time": 6,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 204": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 2101,
+	"collection": {
+		"requests": [
+			{
+				"id": "73937f5b-df8b-4658-a3a4-145895a69f91",
+				"method": "POST"
+			},
+			{
+				"id": "7f886efe-d437-4d4e-aceb-ff884c144c83",
+				"method": "GET"
+			},
+			{
+				"id": "2eb122dc-46fe-49da-af5b-2ec4dff6aaae",
+				"method": "PUT"
+			},
+			{
+				"id": "80269dcf-a73d-41e5-9b52-ef73fd5712a7",
+				"method": "GET"
+			},
+			{
+				"id": "f7cf35e6-84be-4941-9c24-68069d849aad",
+				"method": "DELETE"
+			},
+			{
+				"id": "cd8aef84-9dca-4e1a-8b1b-6cd8135b4964",
+				"method": "GET"
+			}
+		]
+	}
+}
